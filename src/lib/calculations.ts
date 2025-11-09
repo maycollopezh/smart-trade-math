@@ -32,10 +32,10 @@ export const calculateDiscreteDerivative = (
   return derivatives;
 };
 
-export const convertBOBtoUSD = (bob: number, exchangeRate: number = 6.91): number => {
+export const convertBOBtoUSD = (bob: number, exchangeRate: number = 6.96): number => {
   return bob / exchangeRate;
 };
 
-export const convertUSDtoBOB = (usd: number, exchangeRate: number = 6.91): number => {
+export const convertUSDtoBOB = (usd: number, exchangeRate: number = 6.96): number => {
   return usd * exchangeRate;
 };

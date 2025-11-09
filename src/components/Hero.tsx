@@ -22,19 +22,15 @@ const Hero = ({ onGetStarted }: HeroProps) => {
 
       <div className="container relative z-10 px-4 py-20">
         <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
-          <div className="inline-block mb-6 px-4 py-2 bg-primary/10 rounded-full">
-            <span className="text-sm font-semibold text-primary">
-              Análisis Matemático para Emprendedores
-            </span>
-          </div>
+
 
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-hero bg-clip-text text-transparent">
             SmartTrade
           </h1>
 
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Aprende a usar derivadas discretas para analizar cambios de precios y
-            optimizar tus decisiones en el comercio informal
+            Analiza cambios de precios para
+            optimizar tus decisiones en tu negocio y/o emprendimiento
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
@@ -46,14 +42,7 @@ const Hero = ({ onGetStarted }: HeroProps) => {
               <Calculator className="mr-2 h-5 w-5" />
               Comenzar Análisis
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-primary text-primary hover:bg-primary/10 text-lg"
-            >
-              <BarChart3 className="mr-2 h-5 w-5" />
-              Ver Demo
-            </Button>
+            
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
@@ -63,7 +52,7 @@ const Hero = ({ onGetStarted }: HeroProps) => {
               </div>
               <h3 className="text-xl font-semibold mb-2">Cálculos Automáticos</h3>
               <p className="text-muted-foreground">
-                Precio unitario, márgenes de ganancia y derivadas al instante
+                Precio unitario, márgenes de ganancia al instante
               </p>
             </div>
 

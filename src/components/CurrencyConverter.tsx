@@ -9,19 +9,19 @@ import currencyIcon from "@/assets/currency-icon.png";
 const CurrencyConverter = () => {
   const [bob, setBob] = useState("");
   const [usd, setUsd] = useState("");
-  const [exchangeRate, setExchangeRate] = useState("6.91");
+  const [exchangeRate, setExchangeRate] = useState("6.96");
 
   const handleBobChange = (value: string) => {
     setBob(value);
     const numValue = parseFloat(value) || 0;
-    const rate = parseFloat(exchangeRate) || 6.91;
+    const rate = parseFloat(exchangeRate) || 6.96;
     setUsd(convertBOBtoUSD(numValue, rate).toFixed(2));
   };
 
   const handleUsdChange = (value: string) => {
     setUsd(value);
     const numValue = parseFloat(value) || 0;
-    const rate = parseFloat(exchangeRate) || 6.91;
+    const rate = parseFloat(exchangeRate) || 6.96;
     setBob(convertUSDtoBOB(numValue, rate).toFixed(2));
   };
 
@@ -29,7 +29,7 @@ const CurrencyConverter = () => {
     setExchangeRate(value);
     if (bob) {
       const numValue = parseFloat(bob) || 0;
-      const rate = parseFloat(value) || 6.91;
+      const rate = parseFloat(value) || 6.96;
       setUsd(convertBOBtoUSD(numValue, rate).toFixed(2));
     }
   };

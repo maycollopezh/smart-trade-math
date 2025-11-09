@@ -98,8 +98,8 @@ const Index = () => {
 
       <footer className="bg-card border-t border-border py-8 mt-16">
         <div className="container mx-auto px-4 text-center text-muted-foreground">
-          <p>SmartTrade - Análisis de Precios con Derivadas Discretas</p>
-          <p className="text-sm mt-2">Herramienta educativa para emprendedores</p>
+          <p>SmartTrade - Análisis de Precios</p>
+          <p className="text-sm mt-2">Herramienta para emprendedores</p>
         </div>
       </footer>
     </div>

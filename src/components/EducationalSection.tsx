@@ -5,41 +5,10 @@ import { BookOpen, Lightbulb, Calculator } from "lucide-react";
 const EducationalSection = () => {
   return (
     <Card className="shadow-medium animate-fade-in">
-      <CardHeader>
-        <div className="flex items-center gap-3">
-          <BookOpen className="h-8 w-8 text-primary" />
-          <CardTitle className="text-2xl">Aprende Sobre Derivadas Discretas</CardTitle>
-        </div>
-      </CardHeader>
+ 
       <CardContent>
         <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="item-1">
-            <AccordionTrigger className="text-lg font-semibold">
-              <div className="flex items-center gap-2">
-                <Calculator className="h-5 w-5 text-primary" />
-                ¿Qué es la Derivada Discreta?
-              </div>
-            </AccordionTrigger>
-            <AccordionContent className="text-muted-foreground space-y-3 text-base">
-              <p>
-                La derivada discreta es una herramienta matemática que nos permite medir el{" "}
-                <span className="font-semibold text-primary">cambio</span> entre dos valores consecutivos.
-              </p>
-              <div className="p-4 bg-muted rounded-lg">
-                <p className="font-mono text-center text-lg">
-                  Δp = p(t) - p(t-1)
-                </p>
-                <p className="text-sm text-center mt-2">
-                  donde Δp es el cambio de precio
-                </p>
-              </div>
-              <p>
-                En el comercio, nos ayuda a entender si nuestros precios están{" "}
-                <span className="text-primary font-semibold">subiendo</span> o{" "}
-                <span className="text-destructive font-semibold">bajando</span>, y a qué velocidad.
-              </p>
-            </AccordionContent>
-          </AccordionItem>
+  
 
           <AccordionItem value="item-2">
             <AccordionTrigger className="text-lg font-semibold">
