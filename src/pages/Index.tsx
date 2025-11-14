@@ -10,10 +10,21 @@ import { Calculator, TrendingUp, DollarSign, BookOpen } from "lucide-react";
 
 const Index = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [editingProduct, setEditingProduct] = useState<Product | undefined>(undefined);
   const dashboardRef = useRef<HTMLDivElement>(null);
 
   const handleAddProduct = (product: Product) => {
     setProducts([...products, product]);
+  };
+
+  const handleUpdateProduct = (updatedProduct: Product) => {
+    setProducts(products.map(p => p.id === updatedProduct.id ? updatedProduct : p));
+    setEditingProduct(undefined);
+  };
+
+  const handleEditProduct = (product: Product) => {
+    setEditingProduct(product);
+    dashboardRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleGetStarted = () => {
@@ -55,7 +66,11 @@ const Index = () => {
           </TabsList>
 
           <TabsContent value="products" className="space-y-8">
-            <ProductForm onAddProduct={handleAddProduct} />
+            <ProductForm 
+              onAddProduct={handleAddProduct}
+              editingProduct={editingProduct}
+              onUpdateProduct={handleUpdateProduct}
+            />
 
             {products.length === 0 && (
               <div className="text-center py-16 px-4 bg-muted/50 rounded-2xl">
@@ -72,7 +87,11 @@ const Index = () => {
             {products.length > 0 ? (
               <div className="space-y-8">
                 {products.map((product) => (
-                  <ProductAnalysis key={product.id} product={product} />
+                  <ProductAnalysis 
+                    key={product.id} 
+                    product={product}
+                    onEdit={handleEditProduct}
+                  />
                 ))}
               </div>
             ) : (

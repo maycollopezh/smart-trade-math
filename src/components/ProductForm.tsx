@@ -9,15 +9,17 @@ import { toast } from "sonner";
 
 interface ProductFormProps {
   onAddProduct: (product: Product) => void;
+  editingProduct?: Product;
+  onUpdateProduct?: (product: Product) => void;
 }
 
-const ProductForm = ({ onAddProduct }: ProductFormProps) => {
-  const [name, setName] = useState("");
-  const [investment, setInvestment] = useState("");
-  const [units, setUnits] = useState("");
-  const [monthlyPrices, setMonthlyPrices] = useState<MonthlyPrice[]>([
-    { month: "Mes 1", price: 0 },
-  ]);
+const ProductForm = ({ onAddProduct, editingProduct, onUpdateProduct }: ProductFormProps) => {
+  const [name, setName] = useState(editingProduct?.name || "");
+  const [investment, setInvestment] = useState(editingProduct?.investment.toString() || "");
+  const [units, setUnits] = useState(editingProduct?.units.toString() || "");
+  const [monthlyPrices, setMonthlyPrices] = useState<MonthlyPrice[]>(
+    editingProduct?.monthlyPrices || [{ month: "Mes 1", price: 0 }]
+  );
 
   const handleAddMonth = () => {
     setMonthlyPrices([
@@ -47,15 +49,20 @@ const ProductForm = ({ onAddProduct }: ProductFormProps) => {
     }
 
     const product: Product = {
-      id: Date.now().toString(),
+      id: editingProduct?.id || Date.now().toString(),
       name,
       investment: parseFloat(investment),
       units: parseFloat(units),
       monthlyPrices,
     };
 
-    onAddProduct(product);
-    toast.success("Producto agregado exitosamente");
+    if (editingProduct && onUpdateProduct) {
+      onUpdateProduct(product);
+      toast.success("Producto actualizado exitosamente");
+    } else {
+      onAddProduct(product);
+      toast.success("Producto agregado exitosamente");
+    }
 
     // Reset form
     setName("");
@@ -68,7 +75,7 @@ const ProductForm = ({ onAddProduct }: ProductFormProps) => {
     <Card className="shadow-medium animate-fade-in">
       <CardHeader>
         <CardTitle className="text-2xl bg-gradient-primary bg-clip-text text-transparent">
-          Registrar Producto
+          {editingProduct ? "Editar Producto" : "Registrar Producto"}
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -124,16 +131,28 @@ const ProductForm = ({ onAddProduct }: ProductFormProps) => {
               </Button>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 gap-3">
               {monthlyPrices.map((month, index) => (
                 <div key={index} className="flex gap-2">
+                  <div className="w-1/3">
+                    <Input
+                      type="text"
+                      value={month.month}
+                      onChange={(e) => {
+                        const newPrices = [...monthlyPrices];
+                        newPrices[index].month = e.target.value;
+                        setMonthlyPrices(newPrices);
+                      }}
+                      placeholder="Nombre del mes"
+                    />
+                  </div>
                   <div className="flex-1">
                     <Input
                       type="number"
                       step="0.01"
                       value={month.price}
                       onChange={(e) => handlePriceChange(index, e.target.value)}
-                      placeholder={month.month}
+                      placeholder="Precio"
                     />
                   </div>
                   {monthlyPrices.length > 1 && (
@@ -156,7 +175,7 @@ const ProductForm = ({ onAddProduct }: ProductFormProps) => {
             type="submit"
             className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300"
           >
-            Agregar Producto
+            {editingProduct ? "Actualizar Producto" : "Agregar Producto"}
           </Button>
         </form>
       </CardContent>

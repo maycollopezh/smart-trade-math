@@ -14,13 +14,15 @@ import {
   calculateDiscreteDerivative,
 } from "@/lib/calculations";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { TrendingUp, TrendingDown, Minus } from "lucide-react";
+import { TrendingUp, TrendingDown, Minus, Edit } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface ProductAnalysisProps {
   product: Product;
+  onEdit: (product: Product) => void;
 }
 
-const ProductAnalysis = ({ product }: ProductAnalysisProps) => {
+const ProductAnalysis = ({ product, onEdit }: ProductAnalysisProps) => {
   const unitPrice = calculateUnitPrice(product.investment, product.units);
   const derivatives = calculateDiscreteDerivative(product.monthlyPrices);
 
@@ -34,9 +36,20 @@ const ProductAnalysis = ({ product }: ProductAnalysisProps) => {
     <div className="space-y-6 animate-fade-in">
       <Card className="shadow-medium">
         <CardHeader>
-          <CardTitle className="text-2xl bg-gradient-secondary bg-clip-text text-transparent">
-            {product.name}
-          </CardTitle>
+          <div className="flex justify-between items-center">
+            <CardTitle className="text-2xl bg-gradient-secondary bg-clip-text text-transparent">
+              {product.name}
+            </CardTitle>
+            <Button
+              onClick={() => onEdit(product)}
+              variant="outline"
+              size="sm"
+              className="border-primary text-primary hover:bg-primary/10"
+            >
+              <Edit className="h-4 w-4 mr-2" />
+              Editar
+            </Button>
+          </div>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
